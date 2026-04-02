@@ -1,16 +1,17 @@
-import { Controller, Get } from "@nestjs/common";
-import salService from "./salary.service";
+import {Body, Controller, Get, Post, Param} from '@nestjs/common';
 
 @Controller('salary')
-class SalaryController {
-    constructor(private readonly salService: salService) {}
+export default class SalaryController {
     @Get()
-    getSalary() {
-        return this.salService.getSalary();
+    index(): string {
+        return 'Index Page of Salary';
     }
-    @Get('/details')
-    getSalaryDetails() {
-        return this.salService.getSalaryDetails();
+    @Post()
+    create(@Body() {name, city}):string {
+        return `Name: ${name}, City: ${city}`;
+    }
+    @Get(":name")
+    show(@Param() {name}):string {
+        return `Show function ${name}`;
     }
 }
-export default SalaryController;
