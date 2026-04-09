@@ -1,16 +1,22 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import EmployeeService from './employees/employee.service';
-import EmployeeController from './employees/employee.controller';
-import { EmployeeModule } from './employees/employee.module';
-import SalaryController from './salary/salary.controller';
-import { UsersModule } from './users/users.module';
-import { UsersController } from './users/users.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CategoryModule } from './category/category.module';
 
+TypeOrmModule.forRoot({
+  type: 'mysql',
+  host: 'localhost',
+  port:3306,
+  username: 'root',
+  password: '',
+  database: 'nestjs_mern',
+  autoLoadEntities: true,
+  synchronize: false
+});
 @Module({
-  imports: [EmployeeModule, UsersModule],
-  controllers: [AppController, EmployeeController, SalaryController, UsersController],
-  providers: [AppService, EmployeeService],
+  imports: [TypeOrmModule, CategoryModule],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
