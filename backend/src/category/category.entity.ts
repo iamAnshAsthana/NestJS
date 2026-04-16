@@ -6,4 +6,8 @@ export class Category {
     id: number;
     @Column()
     name: string;
+    @Column()
+    description: string;
+    @Column()
+    price: number;
 }
